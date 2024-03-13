@@ -1,0 +1,4 @@
+services:
+  is2_site_release_info.toolbar_data_builder:
+    class: Drupal\is2_site_release_info\Service\ReleaseInfoToolbarDataBuilder
+    arguments: []

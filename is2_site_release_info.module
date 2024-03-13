@@ -1,0 +1,59 @@
+<?php
+/**
+ * @file
+ * Contains the hooks for this module.
+ */
+
+use Drupal\Core\Routing\RouteMatchInterface;
+use Drupal\is2_site_release_info\Callback\PreRenderCallback;
+
+/**
+ * Implements hook_help().
+ */
+function is2_site_release_info_help($route_name, RouteMatchInterface $route_match) {
+  switch ($route_name) {
+    case 'help.page.is2_site_release_info':
+      $output = '<h3>' . t('About') . '</h3>';
+      $output .= '<p>' . t('This module is a lightweight module and reads RELEASE.md file contents (if present) and showcases information in the Drupal toolbar section.') . '</p>';
+      return $output;
+  }
+}
+
+/**
+ * Implements hook_toolbar().
+ */
+function is2_site_release_info_toolbar():array {
+  $user = \Drupal::currentUser();
+  $items = [];
+  $items['release_version'] = [
+    '#cache' => [
+      'contexts' => [
+        'user.permissions',
+      ],
+    ],
+  ];
+
+  if ($user->hasPermission('access shortcuts')) {
+    $items['release_version'] += [
+      '#type' => 'toolbar_item',
+      'tab' => [
+        '#lazy_builder' => [
+          'is2_site_release_info.toolbar_data_builder:renderReleaseInformation',
+          [],
+        ],
+        '#create_placeholder' => TRUE,
+      ],
+      '#wrapper_attributes' => [
+        'class' => [
+          'toolbar-item',
+        ],
+      ],
+      '#weight' => 3399,
+    ];
+  }
+  // Remove the attribute field.
+  $items['release_version'] += \Drupal::service('plugin.manager.element_info')->getInfo('toolbar_item');
+  $items['release_version']['#pre_render'][] = [PreRenderCallback::class, 'removeTabAttributes'];
+
+  return $items;
+}

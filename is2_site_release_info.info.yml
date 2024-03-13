@@ -1,0 +1,5 @@
+name: IS2 Release Information
+description: 'Reads the RELEASE.md and provides current release number in the admin toolbar.'
+type: module
+core_version_requirement: '>= 9'
+package: Administration

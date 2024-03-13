@@ -1,0 +1,9 @@
+{
+    "name": "khgoldberg/is2_site_release_info",
+    "description": "Reads the RELEASE.md and provides current release number in the admin toolbar.",
+    "type": "drupal-module",
+    "license": "GPL-2.0-or-later",
+    "require": {
+        "drupal/environment_indicator": "^4.0"
+    }
+}
