@@ -3,3 +3,6 @@ description: 'Reads the RELEASE.md and provides current release number in the ad
 type: module
 core_version_requirement: '>= 9'
 package: Administration
+
+dependencies:
+  - environment_indicator:environment_indicator
