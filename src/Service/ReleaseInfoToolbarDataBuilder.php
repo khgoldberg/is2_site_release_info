@@ -27,13 +27,19 @@ class ReleaseInfoToolbarDataBuilder implements TrustedCallbackInterface {
   /**
    * Renders the release information.
    *
-   * @return null[]|string[]
+   * @return array
+   *   Array containing the markup.
    */
   public function renderReleaseInformation(): array {
     // Read the RELEASE FILE if present.
     $version = $this->readReleaseFile();
     return [
       '#markup' => $version,
+      '#attached' => [
+        'library' => [
+          'is2_site_release_info/global_style',
+        ],
+      ],
     ];
   }
 
@@ -55,10 +61,11 @@ class ReleaseInfoToolbarDataBuilder implements TrustedCallbackInterface {
       if (!empty($parsedContent)) {
         // Version is on the second line.
         $version = trim($parsedContent[1]);
-        return trim(preg_replace('/[^A-Za-z0-9 .\-]/', '', $version));
+        return ucfirst(trim(preg_replace('/[^A-Za-z0-9 .\-]/', '', $version)));
       }
       return NULL;
     }
     return NULL;
   }
+
 }

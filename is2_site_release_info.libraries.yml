@@ -1,0 +1,5 @@
+global_style:
+  version: 1.0.0
+  css:
+    component:
+      css/is2_site_release.css: {}

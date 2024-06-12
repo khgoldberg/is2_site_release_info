@@ -1,0 +1,8 @@
+.release-info {
+  font-weight: bold;
+}
+.release-info:hover {
+  /* Important added as it was getting overridden using JS and css with priority. */
+  text-decoration: none !important;
+  cursor: default !important;
+}

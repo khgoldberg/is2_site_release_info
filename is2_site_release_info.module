@@ -47,6 +47,7 @@ function is2_site_release_info_toolbar():array {
       '#wrapper_attributes' => [
         'class' => [
           'toolbar-item',
+          'release-info',
         ],
       ],
       '#weight' => 9999,
